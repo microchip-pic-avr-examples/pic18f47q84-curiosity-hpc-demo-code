@@ -16,7 +16,7 @@ The following labs in this demo code project are designed for Microchip’s Curi
   - Microchip PIC18F-Q Series Device Support (1.4.109) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/)
 
   ## Hardware Used
-    - [PIC18F47Q84 Microcontroller](https://www.microchip.com/wwwproducts/en/PIC18F47Q84)
+  - [PIC18F47Q84 Microcontroller](https://www.microchip.com/wwwproducts/en/PIC18F47Q84)
     - [Curiosity High Pin Count (HPC) Development Board](https://www.microchip.com/developmenttools/ProductDetails/PartNO/DM164136)
 
 
