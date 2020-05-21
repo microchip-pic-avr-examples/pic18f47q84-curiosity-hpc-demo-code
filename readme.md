@@ -17,7 +17,7 @@ The following labs in this demo code project are designed for Microchip’s Curi
 
   ## Hardware Used
   - [PIC18F47Q84 Microcontroller](https://www.microchip.com/wwwproducts/en/PIC18F47Q84)
-    - [Curiosity High Pin Count (HPC) Development Board](https://www.microchip.com/developmenttools/ProductDetails/PartNO/DM164136)
+  - [Curiosity High Pin Count (HPC) Development Board](https://www.microchip.com/developmenttools/ProductDetails/PartNO/DM164136)
 
 
   ## LABS
