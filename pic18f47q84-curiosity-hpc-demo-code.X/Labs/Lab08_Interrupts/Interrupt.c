@@ -36,9 +36,7 @@
     TERMS.
 */
 
-#include "../../mcc_generated_files/pin_manager.h"
-#include "../../mcc_generated_files/interrupt_manager.h"
-#include "../../mcc_generated_files/tmr0.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 void LAB_ISR(void);
@@ -52,12 +50,12 @@ void Interrupt(void) {
         LED_D2_SetHigh();
         
         rotateReg = 1;
+        
+        TMR0_PeriodMatchCallbackRegister(LAB_ISR);
        
         INTERRUPT_GlobalInterruptEnable();
         INTERRUPT_TMR0InterruptEnable();
         
-        TMR0_SetInterruptHandler(LAB_ISR);
- 
         labState = RUNNING;
     }
 
@@ -67,7 +65,6 @@ void Interrupt(void) {
     
     if (switchEvent) {
         INTERRUPT_TMR0InterruptDisable();
-
         INTERRUPT_GlobalInterruptDisable();
 
         labState = NOT_RUNNING;
@@ -81,7 +78,7 @@ void LAB_ISR(void) {                                                            
 
     rotateReg >>= 1;
        
-    LEDs = (rotateReg << 4);                                                    // Check which LED should be lit
+    LEDs = (uint8_t)(rotateReg << 4);                                                    // Check which LED should be lit
 }
 /**
  End of File

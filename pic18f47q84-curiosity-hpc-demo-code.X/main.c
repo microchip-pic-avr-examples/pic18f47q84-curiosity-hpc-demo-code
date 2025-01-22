@@ -1,47 +1,18 @@
-/**
-  Generated Main Source File
+ /*
+ * MAIN Generated Driver File
+ * 
+ * @file main.c
+ * 
+ * @defgroup main MAIN
+ * 
+ * @brief This is the generated driver implementation file for the MAIN driver.
+ *
+ * @version MAIN Driver Version 1.0.2
+ *
+ * @version Package Version: 3.1.2
+*/
 
-  Company:
-    Microchip Technology Inc.
-
-  File Name:
-    main.c
-
-  Summary:
-    This is the main file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
-
-  Description:
-    This header file provides implementations for driver APIs for all modules selected in the GUI.
-    Generation Information :
-        Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.81.0
-        Device            :  PIC18F47Q84
-        Driver Version    :  2.00
- */
-
-/*
-    (c) 2018 Microchip Technology Inc. and its subsidiaries. 
-    
-    Subject to your compliance with these terms, you may use Microchip software and any 
-    derivatives exclusively with Microchip products. It is your responsibility to comply with third party 
-    license terms applicable to your use of third party software (including open source software) that 
-    may accompany Microchip software.
-    
-    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
-    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY 
-    IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS 
-    FOR A PARTICULAR PURPOSE.
-    
-    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
-    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP 
-    HAS BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO 
-    THE FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL 
-    CLAIMS IN ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT 
-    OF FEES, IF ANY, THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS 
-    SOFTWARE.
- */
-
-#include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/system/system.h"
 #include "labs.h"
 
 void checkButtonS1(void);
@@ -65,8 +36,8 @@ void main(void) {
     //INTERRUPT_PeripheralInterruptEnable();
 
     // Disable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptDisable();
-
+    //INTERRUPT_PeripheralInterruptDisable();    
+   
     while (1) {
         checkButtonS1();
         switch (labNumber) {
@@ -99,14 +70,9 @@ void main(void) {
 }
 
 void checkButtonS1(void) {
-    if (btnState == NOT_PRESSED) {
-        if (SWITCH_S1_PORT == LOW) {
-            __delay_ms(100);
-            btnState = PRESSED;
-        }
-    } else if (SWITCH_S1_PORT == HIGH) {
-        btnState = NOT_PRESSED;
+    if( CLC1IF ) {
         switchEvent = 1;
+        CLC1IF = 0;        
     }
 }
 

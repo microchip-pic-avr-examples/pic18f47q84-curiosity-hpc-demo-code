@@ -47,7 +47,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 /**
   Section: Macro Declarations
  */
-    #define _XTAL_FREQ          500000
     #define PRESSED             1
     #define NOT_PRESSED         0
     #define RUNNING             1

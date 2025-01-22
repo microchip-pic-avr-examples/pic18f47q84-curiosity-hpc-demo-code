@@ -37,14 +37,13 @@
  */
 
 
-#include "../../mcc_generated_files/pin_manager.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 
 void HelloWorld(void) {
     if (labState == NOT_RUNNING) {
         LEDs_SetLow();
-
         labState = RUNNING;
     }
 

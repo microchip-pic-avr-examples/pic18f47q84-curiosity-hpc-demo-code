@@ -37,8 +37,7 @@
  */
 
 
-#include "../../mcc_generated_files/pin_manager.h"
-#include "../../mcc_generated_files/adcc.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 static uint8_t delay;
@@ -47,23 +46,21 @@ static uint8_t rotateReg;
 void VSR(void) {
 
     if (labState == NOT_RUNNING) {
-        LEDs_SetLow();
-        
+        LEDs_SetLow();        
         rotateReg = 1;                                                          // Initialize temporary register to begin at 1
-
         labState = RUNNING;
     }
 
     if (labState == RUNNING) {        
-        delay = ADCC_GetSingleConversion(POT_CHANNEL) >> 8;                     // Use the top 8 MSbs of the ADC result as delay
-        printf("ADC Result: %d\n\r", ADRES >> 4);                               // Printing ADC result on Serial port
+        delay = (uint8_t)(ADC_ChannelSelectAndConvert(POT_CHANNEL) >> 8);                  // Use the top 8 MSbs of the ADC result as delay
+        printf("ADC Result: %u\n\r", ADRES >> 4);                               // Printing ADC result on Serial port
         __delay_ms(2);
     
         while (delay-- != 0) {                                                  // Decrement the 8 MSbs of the ADC and delay each for 2ms
             __delay_ms(2);
         }
     
-        LEDs = (rotateReg << 4);                                                // Determine which LED will light up
+        LEDs = (uint8_t)(rotateReg << 4);                                                // Determine which LED will light up
 
         rotateReg <<= 1;
        

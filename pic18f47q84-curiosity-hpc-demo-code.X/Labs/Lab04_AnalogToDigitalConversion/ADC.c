@@ -36,9 +36,7 @@
     TERMS.
  */
 
-#include "../../mcc_generated_files/pin_manager.h"
-#include "../../mcc_generated_files/adcc.h"
-#include "../../mcc_generated_files/uart1.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 static uint8_t adcResult;                                                       // Used to store the result of the ADC
@@ -47,14 +45,13 @@ void ADC(void) {
 
     if (labState == NOT_RUNNING) {
         LEDs_SetLow();
-
         labState = RUNNING;
     }
 
     if (labState == RUNNING) {        
-        adcResult = ADCC_GetSingleConversion(POT_CHANNEL) >> 12;                // Get the top 4 MSBs and display it on the LEDs        
-        printf("ADC Result: %d\n\r", ADRES >> 4);                               // Printing ADC result on Serial port
-        LEDs = (adcResult << 4);                                                // Determine which LEDs will light up
+        adcResult = (uint8_t)(ADC_ChannelSelectAndConvert(POT_CHANNEL) >> 12);             // Get the top 4 MSBs and display it on the LEDs        
+        printf("ADC Result: %u\n\r", ADRES >> 4);                               // Printing ADC result on Serial port
+        LEDs = (uint8_t)(adcResult << 4);                                                // Determine which LEDs will light up
     }
 
     if (switchEvent) {

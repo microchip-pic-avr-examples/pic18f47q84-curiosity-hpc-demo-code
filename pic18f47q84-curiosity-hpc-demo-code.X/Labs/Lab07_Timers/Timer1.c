@@ -36,8 +36,7 @@
     TERMS.
 */
 
-#include "../../mcc_generated_files/pin_manager.h"
-#include "../../mcc_generated_files/tmr1.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 static uint8_t rotateReg;
@@ -50,14 +49,14 @@ void Timer1(void) {
         
         rotateReg = 1;                                                          // Initialize temporary register to begin at 1
 
-        TMR1_StartTimer();
+        Timer1_Start();
 
         labState = RUNNING;
     }
 
     if (labState == RUNNING) {
         while(!TMR1_HasOverflowOccured());       
-        TMR1IF = 0;                
+        TMR1_OverflowStatusClear();                
         TMR1_Reload();
 
         rotateReg <<= 1;
@@ -66,12 +65,11 @@ void Timer1(void) {
             rotateReg = 1;
         }
         
-        LEDs = (rotateReg << 4);                                                // Determine which LED will light up
+        LEDs = (uint8_t)(rotateReg << 4);                                                // Determine which LED will light up
     }
 
     if (switchEvent) {
-        TMR1_StopTimer();
-
+        Timer1_Stop();
         labState = NOT_RUNNING;
     }
 }

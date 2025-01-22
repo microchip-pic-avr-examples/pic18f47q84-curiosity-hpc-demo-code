@@ -36,8 +36,7 @@
     TERMS.
 */
 
-#include "../../mcc_generated_files/pin_manager.h"
-#include "../../mcc_generated_files/tmr1.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 #define FLAG_COUNTER_MAX 3                                                      // Maximum flag count to create 1.5 seconds delay
@@ -47,14 +46,14 @@ static uint8_t flagCounter = 0;
 void Blink(void) {
     if (labState  == NOT_RUNNING) {
         LEDs_SetLow();
-        TMR1_StartTimer();
+        TMR1_Start();
 
         labState = RUNNING;
     }
 
     if (labState == RUNNING) {
         while(!TMR1_HasOverflowOccured());   
-        TMR1IF = 0;  
+        TMR1_OverflowStatusClear();  
         TMR1_Reload();    
         flagCounter++;
 
@@ -65,7 +64,7 @@ void Blink(void) {
     }
 
     if (switchEvent) {
-        TMR1_StopTimer();
+        TMR1_Stop();
         labState = NOT_RUNNING;
     }
 }

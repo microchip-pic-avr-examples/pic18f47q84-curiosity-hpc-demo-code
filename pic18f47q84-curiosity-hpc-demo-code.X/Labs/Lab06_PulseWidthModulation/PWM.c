@@ -36,11 +36,7 @@
     TERMS.
  */
 
-#include "../../mcc_generated_files/pin_manager.h"
-#include "../../mcc_generated_files/adcc.h"
-#include "../../mcc_generated_files/pwm3_16bit.h"
-#include "../../mcc_generated_files/tmr2.h"
-#include "../../mcc_generated_files/uart1.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 void PWM_Output_D5_Enable(void);
@@ -52,48 +48,29 @@ void PWM(void) {
     if (labState == NOT_RUNNING) {
         LEDs_SetLow();
         PWM_Output_D5_Enable();
-        TMR2_StartTimer();
 
         labState = RUNNING;
     }
 
     if (labState == RUNNING) {
-        adcResult = ADCC_GetSingleConversion(POT_CHANNEL) >> 4;
-        printf("ADC Result: %d\n\r", adcResult);                                // Printing ADC result on Serial port
-        PWM3_16BIT_SetSlice1Output1DutyCycleRegister(adcResult);
-        PWM3_16BIT_LoadBufferRegisters();
+        adcResult = (uint16_t)(ADC_ChannelSelectAndConvert(POT_CHANNEL));
+        printf("ADC Result: %u\n\r", adcResult);                                // Printing ADC result on Serial port
+        PWM4_16BIT_SetSlice1Output1DutyCycleRegister(adcResult);
+        PWM4_16BIT_LoadBufferRegisters();
     }
 
     if (switchEvent) {
-        TMR2_StopTimer();
         PWM_Output_D5_Disable();
         labState = NOT_RUNNING;
     }
 }
 
-void PWM_Output_D5_Enable(void) {
-    PPSLOCK = 0x55;
-    PPSLOCK = 0xAA;
-    PPSLOCKbits.PPSLOCKED = 0x00;                                               // unlock PPS
-    
-    RA7PPS = 0x01;                                                              // Set D5 as the output of PWM3S1P1 through CLC1
-
-    PPSLOCK = 0x55;
-    PPSLOCK = 0xAA;
-    PPSLOCKbits.PPSLOCKED = 0x01;                                               // lock PPS
+void PWM_Output_D5_Enable(void) {    
+    RA7PPS = 0x1E;                  // Set D5 as the output of PWM4S1P1
 }
 
-void PWM_Output_D5_Disable(void) {
-    PPSLOCK = 0x55;
-    PPSLOCK = 0xAA;
-    PPSLOCKbits.PPSLOCKED = 0x00;                                               // unlock PPS
-    
-    RA7PPS = 0x00;                                                              // Set D5 as GPIO pin
-
-    PPSLOCK = 0x55;
-    PPSLOCK = 0xAA;
-    PPSLOCKbits.PPSLOCKED = 0x01;                                               // lock PPS
-
+void PWM_Output_D5_Disable(void) {       
+    RA7PPS = 0x00;                  // Set D5 as GPIO pin
 }
 /**
  End of File

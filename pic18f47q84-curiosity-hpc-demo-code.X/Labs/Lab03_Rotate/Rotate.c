@@ -36,7 +36,7 @@
     TERMS.
 */
 
-#include "../../mcc_generated_files/pin_manager.h"
+#include "../../mcc_generated_files/system/system.h"
 #include "../../labs.h"
 
 static uint8_t rotateReg;
@@ -61,7 +61,7 @@ void Rotate(void) {
             rotateReg = 1;
 
         
-        LEDs = (rotateReg << 4);                                                // Determine which LED will light up
+        LEDs = (uint8_t)(rotateReg << 4);                                                // Determine which LED will light up
     }                                                                           // ie. which bit in the register the 1 has rotated to.
 
     if (switchEvent) {
