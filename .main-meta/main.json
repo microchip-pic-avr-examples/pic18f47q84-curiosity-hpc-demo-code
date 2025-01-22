@@ -51,9 +51,19 @@
         ],
         "keywords": [
             "Melody",
-            "Hello World",
-            "XC8 3.0",
-            "Curiosity HPC"			
+            "MCC Melody",
+            "XC8",
+            "Curiosity",
+            "GPIO",
+            "PWM",
+            "TMR0",		
+            "TMR1",
+            "TMR2",
+            "ADC",
+            "NVM Controller",
+            "UART",
+            "CLC",
+            "Periodic Interrupts" 
         ],
 		"additionalData": {
 			"longDescription": {
