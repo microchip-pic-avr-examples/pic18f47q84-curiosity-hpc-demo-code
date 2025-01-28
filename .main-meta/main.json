@@ -46,8 +46,7 @@
             "ADC",
             "NVM",
             "UART",
-            "CLC",
-            "VIC" 
+            "CLC"
         ],
         "keywords": [
             "Melody",
