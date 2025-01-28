@@ -12,9 +12,9 @@ The following labs in this demo code project are designed for Microchip’s Curi
 
 ## Software Used
   - [MPLAB® X IDE 6.20](http://www.microchip.com/mplab/mplab-x-ide)
-  - [MPLAB® XC8 3.00 compiler](http://www.microchip.com/mplab/compilers)
+  - [MPLAB® XC8 3.00 compiler or newer](http://www.microchip.com/mplab/compilers)
   - [MPLAB® Code Configurator (MCC) 5.7.1](https://www.microchip.com/mplab/mplab-code-configurator)
-  - [Microchip PIC18F-Q Series Device Support (1.26.442)](https://packs.download.microchip.com/)
+  - [Microchip PIC18F-Q Series Device Support 1.26.442](https://packs.download.microchip.com/)
 
   ## Hardware Used
   - [PIC18F47Q84 Microcontroller](https://www.microchip.com/wwwproducts/en/PIC18F47Q84)
@@ -48,7 +48,7 @@ The following labs in this demo code project are designed for Microchip’s Curi
   LED D2 lights up and stays lit.
 
   #### Summary
-  The LEDs are connected to the Input Output (I/O) pins. First, the I/O pin must be configured as output. In this case, when one of these pins is driven high (LED_D2 = 1), the LED will turn on. These two logic levels are derived from the power pins of the PIC MCU. Since the PIC's power pin (V<sub>DD</sub>) is connected to 5V or 3.3V and the source (V<sub>SS</sub>) to ground (0V), a logic level of '`1`' is equivalent to 5V or 3.3V, and a logic level of '`0`' is 0V.
+  The LEDs are connected to the Input/Output (I/O) pins. First, the I/O pin must be configured as output. In this case, when one of these pins is driven high (LED_D2 = 1), the LED will turn on. These two logic levels are derived from the power pins of the PIC MCU. Since the PIC's power pin (V<sub>DD</sub>) is connected to 5V or 3.3V and the source (V<sub>SS</sub>) to ground (0V), a logic level of '`1`' is equivalent to 5V or 3.3V, and a logic level of '`0`' is 0V.
 
 
   ### <u>Lab 2: Blink</u>
@@ -59,7 +59,7 @@ The following labs in this demo code project are designed for Microchip’s Curi
   LED D2 blinks at a rate of approximately 1.5 seconds.
 
   #### Summary
-  One way to create a delay is to spend time decrementing a variable in software. In assembly, the timing can be accurately programmed since the user will have direct control over the code execution. In C, the compiler takes the source code and compiles it into assembly before creating a Hex file to program to the PIC MCU. Consequently, it is difficult to anticipate the number of instructions needed to execute a line in C. For more accurate timing in C, this lab uses the MCU’s Timer1 (TMR1) module to produce the desired delay. Timer1 is discussed in Lab 7: Timers.
+  One way to create a delay is to spend time decrementing a variable in software. In assembly, the timing can be accurately programmed since the user will have direct control over the code execution. In C, the compiler takes the source code and compiles it into assembly before creating a hex code to program to the PIC MCU. Consequently, it is difficult to anticipate the number of instructions needed to execute a line in C. For more accurate timing in C, this lab uses the MCU’s Timer1 (TMR1) module to produce the desired delay. Timer1 is discussed in Lab 7: Timers.
 
 
   ### <u>Lab 3: Rotate</u>
@@ -70,14 +70,14 @@ The following labs in this demo code project are designed for Microchip’s Curi
   LEDs D2, D3, D4 and D5 light up in turn every 500 ms. Once D5 is lit, D2 lights up and the pattern repeats.
 
   #### Summary
-  In C, we use Binary Left Shift and Right Shift Operators (<< and >>, respectively) to move bits around in the registers. The shift operations are 9-bit operations involving the 8-bit register being manipulated and the Carry bit in the STATUS register as the ninth bit. With the rotate instructions, the register contents are rotated through the Carry bit by means of the rotate instructions. <br />
+  In C, we use Binary Left Shift and Right Shift Operators (<< and >>, respectively) to move bits around in the registers. The shift operations are 9-bit operations involving the 8-bit register being manipulated and the Carry bit in the STATUS register as the ninth bit. With the rotate instruction, the register contents are rotated through the Carry bit by means of the rotate instructions. <br />
 
-  For example, for a certain register rotateReg, use the Binary Left Shift Operator (<<) to push a `1` into the Least Significant Bit (LSB) of the register and have the rest of the bits shift to the left. First set up the Carry bit with the value to be pushed into the register before executing the shift, as seen in the figure below. 
+  For example, for a certain register rotateReg, use the Binary Left Shift Operator (<<) to push a '`1`' into the Least Significant Bit (LSb) of the register and have the rest of the bits shift to the left. First set up the Carry bit with the value to be pushed into the register before executing the shift, as seen in the figure below. 
 
   ###### Left Shift Binary Operation
   ![Lab3-left-shift-binary-operation](images/Lab3-left-shift-binary-operation.PNG)
 
-  Similarly, use the Binary Right Shift Operator (>>) to push a `1` into the Most Significatn Bit (MSB) of the register and have the rest of the bits shift to the right. First set up the Carry bit with the value to be pushed into the register before executing the shift, as seen in the figure below.
+  Similarly, use the Binary Right Shift Operator (>>) to push a '`1`' into the Most Significatn Bit (MSb) of the register and have the rest of the bits shift to the right. First set up the Carry bit with the value to be pushed into the register before executing the shift, as seen in the figure below.
 
   ###### Right Shift Binary Operation
   ![Lab3-right-shift-binary-operation](images/Lab3-right-shift-binary-operation.PNG)
@@ -88,7 +88,7 @@ The following labs in this demo code project are designed for Microchip’s Curi
   This lab shows how to configure the ADC, run a conversion, read the analog voltage controlled by the on-board potentiometer, print the conversion result on the Universal Asynchronous Receiver and Transmitter (UART) and display the high order four bits on the display.
 
   #### Hardware Effects
-  The four MSBs of the ADC result are reflected onto each of the four LEDs, respectively. Rotate the potentiometer to change the display. <br />
+  The four MSbs of the ADC result are reflected onto each of the four LEDs, respectively. Rotate the potentiometer to change the display. <br />
   The ADC value will be printed on UART the TX pin which is connected to pin RC6 through Peripheral Pin Select (PPS). Connect RC6 to the Virtual COM port using a jumper wire to use the on-board serial-to-USB feature.
 
   #### Summary
@@ -146,7 +146,7 @@ The following labs in this demo code project are designed for Microchip’s Curi
 
   ### <u>Lab 9: Wake-up From Sleep Using Watchdog Timer (WDT)</u>
   #### Introduction
-  This lab introduces Sleep mode. The `SLEEP()` function is used to put the device into a low power standby mode.
+  This lab introduces Sleep mode. The `SLEEP()` function is used to put the device into a low-power standby mode.
 
   #### Hardware Effects
   Once this lab is in Running state, the WDT will start counting. While in Sleep mode, LEDs D2/D4 and D3/D5 are turned ON and OFF, respectively. Pressing the switch won't go to the next lab since the PIC is in Sleep mode. After the WDT has reached its period, which is approximately 4s for this lab, the PIC exits Sleep mode and the four LEDs, D2 through D5, are toggled.
@@ -167,7 +167,7 @@ The following labs in this demo code project are designed for Microchip’s Curi
   This lab provides code for writing and reading a single byte to the on-board EEPROM. EEPROM is nonvolatile memory, meaning that it does not lose its value when power is shut off. This is unlike RAM, which will lose its value when no power is applied. The EEPROM is useful for storing variables that must available between power cycles. A good use case is to store calibration data for the user application and have it loaded on every boot-up. It is also convenient to use if the entire RAM space is used up. Writes and reads to the EEPROM are relatively quick, being much faster than Program Flash Memory (PFM) operations.
 
   #### Hardware Effects
-  The ADC is used to continously sample the potentiometer, and the upper MSBs of the result are written to the LEDs. When switch S2 is pressed, the current ADC value is written to the first location in EEPROM and the entire contents of the EEPROM memory is printed via the serial port. When the switch is pressed again, the current ADC value is written to the next address in EEPROM and the EEPROM contents are printed again. This process can be repeated until the EEPROM memory is full, after which the program will start writing ADC values starting at the beginning of EEPROM. 
+  The ADC is used to continously sample the potentiometer, and the upper MSbs of the result are written to the LEDs. When switch S2 is pressed, the current ADC value is written to the first location in EEPROM and the entire contents of the EEPROM memory is printed via the serial port. When the switch is pressed again, the current ADC value is written to the next address in EEPROM and the EEPROM contents are printed again. This process can be repeated until the EEPROM memory is full, after which the program will start writing ADC values starting at the beginning of EEPROM. 
 
   #### Summary
   This lab stores an ADC value every time switch 2 is pressed, effectively keeping a log of all ADC values. 
